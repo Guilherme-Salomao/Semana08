@@ -78,6 +78,7 @@ public class Principal {
         var descricaoDoProduto = scanner.next();
         Produto saved = produtoRepository.findById((long) idDoProduto).orElseThrow(NoSuchElementException::new);
         saved.setDescricao(descricaoDoProduto);
+        produtoRepository.save(saved);
         System.out.println("Produto alterado com sucesso");
         inicial();
     }
@@ -85,13 +86,8 @@ public class Principal {
     private void visualizar() {
         System.out.println("Produtos cadastrados:");
         List<Produto> todos = produtoRepository.findAll();
-        if (todos.size() != 0) {
-            todos.forEach(p2 -> System.out.println(p2.toString()));
-        } //else {
-        //    System.out.println("\nNão existe nenhum produto cadastrado.");
-        // }
-        //System.out.println("\nPressione qualquer tecla e de ENTER para voltar ao menu principal");
-        scanner.next();
+        todos.forEach(p2 -> System.out.println(p2.toString()));
+        inicial();
     }
 
     private void deletar(Scanner scanner) {
